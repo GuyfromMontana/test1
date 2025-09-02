@@ -1,20 +1,25 @@
-// MONTANA FEED COMPANY - COMPLETE AI VOICE AGENT SERVER
-// Final integrated version with all functionality + voice debug system
 
 const express = require('express');
-const cors = require('cors');
-const { createClient } = require('@supabase/supabase-js');
-require('dotenv').config();
-
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Middleware
-app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-// Supabase client setup
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    status: 'healthy',
+    message: 'Server is running!',
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.get('/', (req, res) => {
+  res.send('Montana Feed Company Server is running!');
+});
+
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server running on port ${port}`);
+});t setup
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_KEY
